@@ -1,32 +1,27 @@
 import React, { useState } from "react";
 
 function App() {
-  const [text, setText] = useState({
-    words: "",
-    on: false,
-  });
+  const [text, setText] = useState("");
 
   function onChange(event: any) {
-    const { value, name } = event.target;
-    setText((prevText) => ({
-      ...prevText,
-      [name]: value,
-    }));
+    const { value } = event.target;
+    setText(value);
   }
 
-  function onClick() {
-    setText((prevText) => ({ ...prevText, on: !prevText.on }));
-  }
+  function calculateWordCount(text) {
+    const wordsArr = text.trim().split(" ")
+    return wordsArr.filter(word => word !== "").length
+}
 
-  console.log(text.words, text.on);
+  console.log(text);
 
   return (
     <div>
       <h1>How fast do you type?</h1>
-      <textarea name="words" onChange={onChange} value={text.words} />
+      <textarea name="words" onChange={onChange} value={text} />
       <h4>Time remaining: ???</h4>
-      <button onClick={onClick}>Start</button>
-      <h1>{`Word count: ${text.on ? text.words.split(" ").length : "???"}`}</h1>
+      <button onClick={() => calculateWordCount(text)}>Start</button>
+      <h1>{`Word count: ${calculateWordCount}`}</h1>
     </div>
   );
 }
