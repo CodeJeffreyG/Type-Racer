@@ -8,10 +8,10 @@ function App() {
     setText(value);
   }
 
-  function calculateWordCount(text) {
-    const wordsArr = text.trim().split(" ")
-    return wordsArr.filter(word => word !== "").length
-}
+  function calculateWordCount(text: any) {
+    const wordsArr = text.trim().split(" ");
+    return wordsArr.filter((word: any) => word !== "").length;
+  }
 
   console.log(text);
 
@@ -21,7 +21,7 @@ function App() {
       <textarea name="words" onChange={onChange} value={text} />
       <h4>Time remaining: ???</h4>
       <button onClick={() => calculateWordCount(text)}>Start</button>
-      <h1>{`Word count: ${calculateWordCount}`}</h1>
+      <h1>{`Word count: ???`}</h1>
     </div>
   );
 }
