@@ -15,11 +15,10 @@ function App() {
   }
 
   function onClick() {
-    setText(prevText => ({...prevText, on: !prevText.on}))
+    setText((prevText) => ({ ...prevText, on: !prevText.on }));
   }
 
-  console.log(text.words, text.on)
-
+  console.log(text.words, text.on);
 
   return (
     <div>
@@ -27,7 +26,7 @@ function App() {
       <textarea name="words" onChange={onChange} value={text.words} />
       <h4>Time remaining: ???</h4>
       <button onClick={onClick}>Start</button>
-      <h1>Word count: ???</h1>
+      <h1>{`Word count: ${text.on ? text.words.split(" ").length : "???"}`}</h1>
     </div>
   );
 }
