@@ -14,14 +14,19 @@ function App() {
     }));
   }
 
-  function onClick(text: string) {}
+  function onClick() {
+    setText(prevText => ({...prevText, on: !prevText.on}))
+  }
+
+  console.log(text.words, text.on)
+
 
   return (
     <div>
       <h1>How fast do you type?</h1>
-      <textarea name="text" onChange={onChange} value={text.words} />
+      <textarea name="words" onChange={onChange} value={text.words} />
       <h4>Time remaining: ???</h4>
-      <button>Start</button>
+      <button onClick={onClick}>Start</button>
       <h1>Word count: ???</h1>
     </div>
   );
