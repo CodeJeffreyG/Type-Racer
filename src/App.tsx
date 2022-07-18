@@ -1,5 +1,6 @@
 import { time } from "console";
 import React, { useState, useEffect } from "react";
+import { start } from "repl";
 import { isShorthandPropertyAssignment } from "typescript";
 
 function App() {
@@ -7,7 +8,7 @@ function App() {
   const [text, setText] = useState("");
 
   //set state for decrementing counter
-  const [timeRemaining, setTimeRemaining] = useState(5);
+  const [timeRemaining, setTimeRemaining] = useState(0);
 
   //state for if game is running
   const [isGameRunning, setisGamerunning] = useState(false);
@@ -19,6 +20,8 @@ function App() {
       setTimeout(() => {
         setTimeRemaining((time) => time - 1);
       }, 1000);
+    } else if(timeRemaining <= 0){
+      
     }
   }, [timeRemaining]);
 
@@ -27,6 +30,16 @@ function App() {
     const { value } = event.target;
     setText(value);
   }
+
+  function startGame(){
+    if(timeRemaining === 0){
+      setisGamerunning(prevGame => true)
+      setText(prevText => "")
+      setTimeRemaining(prevTime => 10)
+    }
+  }
+
+  
 
   //logic to count words... ensures an empty string is not counted to length
   function calculateWordCount(text: any) {
@@ -41,7 +54,7 @@ function App() {
       <h1>How fast do you type?</h1>
       <textarea name="words" onChange={onChange} value={text} />
       <h4>{`Time remaining: ${timeRemaining}`}</h4>
-      <button onClick={() => setisGamerunning(true)}>Start</button>
+      <button onClick={startGame}>Start</button>
       <h1>{`Word count: ???`}</h1>
     </div>
   );
