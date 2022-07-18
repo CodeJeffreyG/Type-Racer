@@ -1,7 +1,3 @@
-import { time } from "console";
-import React, { useState, useEffect, useRef } from "react";
-import { start } from "repl";
-import { isShorthandPropertyAssignment } from "typescript";
 import useGame from "./useGame";
 
 function App() {
