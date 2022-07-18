@@ -13,6 +13,9 @@ function App() {
   //state for if game is running
   const [isGameRunning, setisGamerunning] = useState(false);
 
+  //setting word count state
+  const [wordCount, setWordCount] = useState("???")
+
   //decrement timer
   useEffect(() => {
     //set condition for set timeout to stop decrementing
@@ -21,7 +24,7 @@ function App() {
         setTimeRemaining((time) => time - 1);
       }, 1000);
     } else if(timeRemaining <= 0){
-      
+      endGame()
     }
   }, [timeRemaining]);
 
@@ -33,10 +36,16 @@ function App() {
 
   function startGame(){
     if(timeRemaining === 0){
-      setisGamerunning(prevGame => true)
-      setText(prevText => "")
-      setTimeRemaining(prevTime => 10)
+      setisGamerunning(true)
+      setText("")
+      setTimeRemaining(10)
     }
+  }
+
+  function endGame(){
+    let numOfWords = calculateWordCount(text)
+    setWordCount(numOfWords)
+    setisGamerunning(false)
   }
 
   
@@ -52,10 +61,10 @@ function App() {
   return (
     <div>
       <h1>How fast do you type?</h1>
-      <textarea name="words" onChange={onChange} value={text} />
+      <textarea disabled = {!isGameRunning} name="words" onChange={onChange} value={text} />
       <h4>{`Time remaining: ${timeRemaining}`}</h4>
-      <button onClick={startGame}>Start</button>
-      <h1>{`Word count: ???`}</h1>
+      <button disabled = {isGameRunning} onClick={startGame}>Start</button>
+      <h1>{`Word count: ${wordCount}`}</h1>
     </div>
   );
 }
