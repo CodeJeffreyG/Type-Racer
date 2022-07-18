@@ -14,7 +14,7 @@ function App() {
   const [isGameRunning, setisGamerunning] = useState(false);
 
   //setting word count state
-  const [wordCount, setWordCount] = useState("???")
+  const [wordCount, setWordCount] = useState("???");
 
   //decrement timer
   useEffect(() => {
@@ -23,8 +23,8 @@ function App() {
       setTimeout(() => {
         setTimeRemaining((time) => time - 1);
       }, 1000);
-    } else if(timeRemaining <= 0){
-      endGame()
+    } else if (timeRemaining <= 0) {
+      endGame();
     }
   }, [timeRemaining]);
 
@@ -34,21 +34,20 @@ function App() {
     setText(value);
   }
 
-  function startGame(){
-    if(timeRemaining === 0){
-      setisGamerunning(true)
-      setText("")
-      setTimeRemaining(10)
+  function startGame() {
+    if (timeRemaining === 0) {
+      setisGamerunning(true);
+      setText("");
+      setTimeRemaining(10);
+      setWordCount("???");
     }
   }
 
-  function endGame(){
-    let numOfWords = calculateWordCount(text)
-    setWordCount(numOfWords)
-    setisGamerunning(false)
+  function endGame() {
+    let numOfWords = calculateWordCount(text);
+    setWordCount(numOfWords);
+    setisGamerunning(false);
   }
-
-  
 
   //logic to count words... ensures an empty string is not counted to length
   function calculateWordCount(text: any) {
@@ -61,9 +60,20 @@ function App() {
   return (
     <div>
       <h1>How fast do you type?</h1>
-      <textarea disabled = {!isGameRunning} name="words" onChange={onChange} value={text} />
-      <h4>{`Time remaining: ${timeRemaining}`}</h4>
-      <button disabled = {isGameRunning} onClick={startGame}>Start</button>
+      <textarea
+        disabled={!isGameRunning}
+        name="words"
+        onChange={onChange}
+        value={text}
+      />
+      <h4>
+        {isGameRunning
+          ? `Time remaining: ${timeRemaining}`
+          : "Press Start To Play!"}
+      </h4>
+      <button disabled={isGameRunning} onClick={startGame}>
+        Start
+      </button>
       <h1>{`Word count: ${wordCount}`}</h1>
     </div>
   );
