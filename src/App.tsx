@@ -1,5 +1,5 @@
 import { time } from "console";
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { start } from "repl";
 import { isShorthandPropertyAssignment } from "typescript";
 
@@ -15,6 +15,9 @@ function App() {
 
   //setting word count state
   const [wordCount, setWordCount] = useState("???");
+
+  //to set focus to text area
+  const textBoxRef: any = useRef(null);
 
   //decrement timer
   useEffect(() => {
@@ -40,6 +43,8 @@ function App() {
       setText("");
       setTimeRemaining(10);
       setWordCount("???");
+      textBoxRef.current.disabled = false;
+      textBoxRef.current.focus();
     }
   }
 
@@ -65,6 +70,7 @@ function App() {
         name="words"
         onChange={onChange}
         value={text}
+        ref={textBoxRef}
       />
       <h4>
         {isGameRunning
