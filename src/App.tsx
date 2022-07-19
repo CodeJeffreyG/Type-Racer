@@ -30,7 +30,7 @@ function App() {
       <button disabled={isGameRunning} onClick={startGame}>
         Start
       </button>
-      <h1>{`Word count: ${wordCount}`}</h1>
+      <h1>{ `Word count: ${wordCount}`}</h1>
     </div>
   );
 }
